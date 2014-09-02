@@ -55,6 +55,7 @@
 	
 ### 方式2，使用web SQL实现
 
+@kezhi 补充websql调用方式
 
 
 ## 总结

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>websql</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+*{padding: 0; margin: 0;}
+body{padding: 20px;}
+li{ list-style: none;}
+input[type=button]{padding: 10px; display: inline-block; width: 80px; height: 30px;}
+.listTitle{background: #efefef; width: 480px; margin-top: 20px;}
+.list{width: 480px;}
+.list li{line-height: 28px;}
+.listTitle span,.list span{ display: inline-block; text-align: center; width: 120px;}
+a.del{display: block;}
+.tableList{border-top:1px solid #efefef; border-left:1px solid #efefef; margin-top: 20px}
+.tableList td,.tableList th{border-right:1px solid #efefef; border-bottom:1px solid #efefef; padding: 5px 10px; line-height: 30px;}
+</style>
+
+</head>
+<body>
+<input type="button" class="btnAddData" value="添加数据"/>
+<input type="button" class="btnGetData" value="获取数据"/>
+
+<p class="addDataText">
+<table class="tableList">
+	<tr><th>mid</th><th>name</th><th>nickname</th><th>gender</th></tr>
+	<tr></tr>
+</table>
+</p>
+
+	<script src="../bower/bower_components/jquery/dist/jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+			//创建数据库
+			var myDB = window.openDatabase('myData', '1.0', '测试数据库', 20000);
+			//要存的数据
+			var data = {
+				mid:1,
+				name:'kezhi',
+				nickname:'zhi.ke',
+				gender:'girl'
+			};
+
+			var keys = '';
+			var vals = [];
+			for(var key in data){
+				keys += key+',';
+				vals.push(data[key]);
+			}
+			if(keys.substr(keys.length-1)==','){
+				keys=keys.substr(0,keys.length-1);
+			}
+
+			var valLen = '?';
+			var valLens = '';
+			for(var i=0;i<vals.length;i++){
+				valLens += valLen+',';
+			}
+			if(valLens.substr(valLens.length-1)==','){
+				valLens=valLens.substr(0,valLens.length-1);
+			}
+			console.log(keys,vals,valLens);
+
+			//建表
+			$('.btnAddData').on('click',function(){
+				myDB.transaction(function(tx){
+					tx.executeSql("create table if not exists data ("+keys+")",[],function(){
+						console.log('add table seccess');
+					});
+					//存数据
+					tx.executeSql("insert into data ("+keys+") values("+valLens+")",vals, function (tx, result) {
+						console.log('add data seccess');
+					}, function (error) {
+						alert('error');
+					});
+				});
+			});
+
+			//取数据字段
+			$('.btnGetData').on('click',function(){
+				myDB.transaction(function(tx) {
+					tx.executeSql("select * from data", [], function(tx, result) {
+						for (var i = 0; i < result.rows.length; i++) {
+							$('.tableList tr').eq(1).html(
+								'<td>'+result.rows.item(i)['mid']+'</td><td>'+result.rows.item(i)['name']+'</td>' +
+										'<td>'+result.rows.item(i)['nickname']+'</td><td>'+result.rows.item(i)['gender']+'</td>'
+							);
+						}
+
+					});
+				});
+
+			});
+
+
+
+
+		});
+	</script>
+</body>
+</html>
+

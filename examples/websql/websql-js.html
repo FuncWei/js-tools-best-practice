@@ -19,19 +19,19 @@ a.del{display: block;}
 
 </head>
 <body>
-<input type="button" class="btnAddData" value="添加数据"/>
-<input type="button" class="btnGetData" value="获取数据"/>
+<input type="button" id="btnAddData" value="添加数据"/>
+<input type="button" id="btnGetData" value="获取数据"/>
 
 <p class="addDataText">
 <table class="tableList">
 	<tr><th>mid</th><th>name</th><th>nickname</th><th>gender</th></tr>
-	<tr></tr>
+	<tr id="datalist"></tr>
 </table>
 </p>
 
-	<script src="../bower/bower_components/jquery/dist/jquery.js"></script>
+	<!--<script src="../bower/bower_components/jquery/dist/jquery.js"></script>-->
 	<script>
-		$(document).ready(function() {
+		function websql(){
 			//创建数据库
 			var myDB = window.openDatabase('myData', '1.0', '测试数据库', 20000);
 			//要存的数据
@@ -63,7 +63,7 @@ a.del{display: block;}
 			console.log(keys,vals,valLens);
 
 			//建表
-			$('.btnAddData').on('click',function(){
+			document.getElementById('btnAddData').onclick=function(){
 				myDB.transaction(function(tx){
 					tx.executeSql("create table if not exists data ("+keys+")",[],function(){
 						console.log('add table seccess');
@@ -75,28 +75,25 @@ a.del{display: block;}
 						alert('error');
 					});
 				});
-			});
+			};
 
 			//取数据字段
-			$('.btnGetData').on('click',function(){
+			var datalist = document.getElementById('datalist');
+			document.getElementById('btnGetData').onclick=function(){
 				myDB.transaction(function(tx) {
 					tx.executeSql("select * from data", [], function(tx, result) {
 						for (var i = 0; i < result.rows.length; i++) {
-							$('.tableList tr').eq(1).html(
+							datalist.innerHTML=
 								'<td>'+result.rows.item(i)['mid']+'</td><td>'+result.rows.item(i)['name']+'</td>' +
-										'<td>'+result.rows.item(i)['nickname']+'</td><td>'+result.rows.item(i)['gender']+'</td>'
-							);
+										'<td>'+result.rows.item(i)['nickname']+'</td><td>'+result.rows.item(i)['gender']+'</td>';
 						}
 
 					});
 				});
 
-			});
-
-
-
-
-		});
+			};
+		};
+		websql();
 	</script>
 </body>
 </html>

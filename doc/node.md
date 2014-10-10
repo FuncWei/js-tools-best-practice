@@ -1,5 +1,42 @@
 # nodejs
 
+## nvm 快速切换 Node 版本
+
+nvm: https://github.com/creationix/nvm
+
+nvm 默认是从 http://nodejs.org/dist/ 下载的, 国外服务器, 必然很慢,
+好在 nvm 以及支持从镜像服务器下载包, 于是我们可以方便地从七牛的 node dist 镜像下载:
+
+```
+$ NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist nvm install 0.11.11
+```
+
+于是你就会看到一段非常快速进度条:
+
+```
+######################################################################## 100.0%
+Now using node v0.11.11
+```
+
+如果你不想每次都输入环境变量 NVM_NODEJS_ORG_MIRROR, 那么我建议你加入到 .bashrc 文件中:
+
+### nvm
+
+```
+export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist
+source ~/git/nvm/nvm.sh
+```
+然后你可以继续非常方便地安装各个版本的 node 了, 你可以查看一下你当前已经安装的版本:
+
+```
+$ nvm ls
+         nvm
+     v0.8.26
+    v0.10.26
+    v0.11.11
+->  v0.11.12
+```
+
 ## nrm 快速切换 NPM 源
 
 http://www.tuicool.com/articles/nYjqeu

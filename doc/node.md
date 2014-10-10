@@ -20,7 +20,7 @@ Now using node v0.11.11
 
 如果你不想每次都输入环境变量 `NVM_NODEJS_ORG_MIRROR`, 那么我建议你加入到 .bashrc 文件中:
 
-### nvm
+source
 
 ```
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist

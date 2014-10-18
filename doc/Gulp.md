@@ -366,3 +366,4 @@ http://documentup.com/arturadib/shelljs
 - [Grunt Gulp 战斗法师](http://zhuanlan.zhihu.com/TLA42/19711450)
 - [awesome-9-gulp-plugins/](http://blog.nodejitsu.com/npmawesome-9-gulp-plugins/)
 - [introduction-to-gulp-js-with-practical-examples/](http://julienrenaux.fr/2014/05/25/introduction-to-gulp-js-with-practical-examples/)
+- [gulpru-men-zhi-nan](http://987.tw/2014/07/09/gulpru-men-zhi-nan/)

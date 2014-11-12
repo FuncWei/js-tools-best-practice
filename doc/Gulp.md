@@ -281,6 +281,27 @@ http://documentup.com/arturadib/shelljs
 ## reload usage
 
 
+可以使用browsersync的gulp插件，这个比较方便
+
+先安装依赖
+
+	npm install browser-sync gulp --save-dev
+
+具体task写法
+
+	var gulp        = require('gulp');
+	var browserSync = require('browser-sync');
+
+	// Static server
+	gulp.task('browser-sync', function() {
+	    browserSync({
+	        server: {
+	            baseDir: "./"
+	        }
+	    });
+	});
+
+更多api参见http://www.browsersync.io/docs/gulp/
 ## 项目实战
 
 	require('shelljs/global');

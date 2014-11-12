@@ -8,6 +8,7 @@ js-tools-best-practice
 - [bower](doc/bower.md)
 - [grunt](doc/grunt.md)
 - [node](doc/node.md)
+- [build](doc/build.md)
 
 
 ## To do

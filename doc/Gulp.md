@@ -302,6 +302,13 @@ http://documentup.com/arturadib/shelljs
 	});
 
 更多api参见http://www.browsersync.io/docs/gulp/
+
+## git pages分支自动推送
+
+详见[gulp-gh-pages插件教程]
+
+- https://github.com/i5ting/gp-pages-import-test
+
 ## 项目实战
 
 	require('shelljs/global');

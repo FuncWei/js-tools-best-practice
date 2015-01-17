@@ -380,6 +380,36 @@ http://documentup.com/arturadib/shelljs
 
 .....
 
+## best practice
+
+
+我发现gulp-load-plugin模块十分有用，它能够自动地从package.json中加载任意Gulp插件然后把它们附加到一个对象上。它的基本用法如下所示：
+
+```
+var gulpLoadPlugins = require('gulp-load-plugins'),
+    plugins = gulpLoadPlugins();
+```
+
+你可以把所有代码写到一行，但是我并不推荐这样做。
+
+在执行那些代码之后，插件对象就已经包含了插件，并使用“驼峰式”的方式进行命名（例如，gulp-ruby-sass将被加载成plugins.rubySass），这样就可以很方便地使用了：
+
+```
+var gulp = require('gulp'),
+   gulpLoadPlugins = require('gulp-load-plugins'),
+   plugins = gulpLoadPlugins();
+
+gulp.task('js', function () {
+  return gulp.src('js/*.js')
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('default'))
+    .pipe(plugins.uglify())
+    .pipe(plugins.concat('app.js'))
+    .pipe(gulp.dest('build'));
+});
+```
+
+more see https://github.com/jackfranklin/gulp-load-plugins
 
 ## url
 

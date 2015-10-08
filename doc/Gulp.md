@@ -234,6 +234,33 @@ gulp watch log info : src directory changed.
 
 说明：会把src下得每个js都压缩，然后concat合并成一个trans.min.js，并放到toc/js目录下面
 
+## reversion
+
+上线的代码都是压缩处理后的，不过名字固定会带来一个问题：代码更新后，由于浏览器缓存，客户那边还是旧的代码。这个问题可以通过2个办法来解决
+
+1. 文件名带版本号 main.min.VERSION.js 或 
+2. 请求 URL 带 queryString main.min.js?v=VERSION，或其他服务器、后端方式解决。 
+
+开发的代码要做好充分的调试、测试，使用 Gulp 发布代码的时候，要注意生成 css/js 的 sourcemap 文件，这样可以方便出问题时候定位到源代码上。
+
+- gulp-rev
+- gulp-rev-replace
+
+更多见https://github.com/sindresorhus/gulp-rev
+
+## 集成rev
+
+方法1：用gulp rev 生成json 再写到模版里面
+
+https://github.com/sindresorhus/gulp-rev/blob/master/integration.md#approach-1---generate-indexhtml-during-build
+
+
+方法2：gulp-useref
+
+https://github.com/jonkemp/gulp-useref
+
+
+
 ## use with shelljs
 
 see demo 8
